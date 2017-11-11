@@ -1,4 +1,3 @@
-# PTID: 152624684
 Feature: Upload a RuQL file
 	As an instructor
 	So that I can add questions
@@ -17,16 +16,12 @@ Scenario: upload a file successfully
 	Given I am on the upload page
 	And I attach the file "features/test_files/foo.txt" to "file_upload"
 	And I press "Upload File"
-	And I pending
-	Then an animation should run for Uploading File!
 	Then I should see "Upload successful!"
 
 Scenario: upload a file successfully
     Given I am on the upload page
     And I attach the file "features/test_files/advanced_render.txt" to "file_upload"
     And I press "Upload File"
-    And I pending
-    Then an animation should run for Uploading File!
     Then I should see "Upload successful!"
 
 Scenario: syntax error in the file
