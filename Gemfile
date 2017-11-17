@@ -29,6 +29,8 @@ gem 'jquery-rails'
 gem 'haml'
 gem 'zeroclipboard-rails'
 gem 'clipboard-rails'
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
 
 group :development, :test do
   gem 'cucumber-rails', :require => false

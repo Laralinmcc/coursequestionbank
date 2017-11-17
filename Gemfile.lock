@@ -109,6 +109,19 @@ GEM
     docile (1.1.5)
     domain_name (0.5.20170404)
       unf (>= 0.0.5, < 1.0.0)
+    elasticsearch (5.0.4)
+      elasticsearch-api (= 5.0.4)
+      elasticsearch-transport (= 5.0.4)
+    elasticsearch-api (5.0.4)
+      multi_json
+    elasticsearch-model (5.0.1)
+      activesupport (> 3)
+      elasticsearch (~> 5)
+      hashie
+    elasticsearch-rails (5.0.1)
+    elasticsearch-transport (5.0.4)
+      faraday
+      multi_json
     erubis (2.7.0)
     execjs (2.5.2)
     faraday (0.9.1)
@@ -297,6 +310,8 @@ DEPENDENCIES
   coveralls
   cucumber-rails
   database_cleaner
+  elasticsearch-model
+  elasticsearch-rails
   figaro
   googlecharts!
   haml
