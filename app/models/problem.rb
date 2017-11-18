@@ -18,26 +18,52 @@ class Problem < ActiveRecord::Base
   scope :instructor_id, ->(id) { where(instructor_id: id) }
 
 
-  searchable do
-    integer   :id
-    text      :text
-    text      :json, :more_like_this => true
-    integer   :instructor_id
-    boolean   :is_public
-    integer   :access_level
-    time      :last_used
-    time      :updated_at
-    string    :problem_type
-    time      :created_date
-    boolean   :obsolete
-    string    :bloom_category
-    string    :uid
+  # searchable do
+    # integer   :id
+    # text      :text
+    # text      :json, :more_like_this => true
+    # integer   :instructor_id
+    # boolean   :is_public
+    # integer   :access_level
+    # time      :last_used
+    # time      :updated_at
+    # string    :problem_type
+    # time      :created_date
+    # boolean   :obsolete
+    # string    :bloom_category
+    # string    :uid
 
-    string :tag_names, :multiple => true do
-      tags.map(&:name)
-    end
-    integer :collection_ids, :multiple => true do
-      collections.map(&:id)
+    # string :tag_names, :multiple => true do
+    #   tags.map(&:name)
+    # end
+    # integer :collection_ids, :multiple => true do
+    #   collections.map(&:id)
+    # end
+  # end
+  
+  settings do
+    mappings dynamic: 'false' do
+      indexes :id
+      indexes :text
+      indexes :json, :more_like_this => true
+      indexes :instructor_id
+      indexes :is_public
+      indexes :access_level
+      indexes :last_used
+      indexes :updated_at
+      indexes :problem_type
+      indexes :created_date
+      indexes :obsolete
+      indexes :bloom_category
+      indexes :uid
+      tags = Hash.new
+      indexes :tag_names, :multiple => true do
+        tags.map(&:name)
+      end
+      collections = Hash.new
+      indexes :collection_ids, :multiple => true do
+        collections.map(&:id)
+      end
     end
   end
 
@@ -182,29 +208,32 @@ class Problem < ActiveRecord::Base
   end
 
   def self.filter(user, filters, bump_problem)
-      problems = Problem.search do
+    search_hash = Hash.new
+    search_hash[:instructor_id] = user.id
+    search_hash[:access_level] = 1
+      # with(:instructor_id, user.id)
+      # with(:access_level, 1)
+    if user.privilege != "Student"
+      # with(:access_level, 2)
+      search_hash[:access_level] = 2
+    end
+    # end
+
+    filters[:tags].each do |tag|
+      search_hash[:tag_names] = tag
+      # with(:tag_names, tag)
+    end
+
+    ["problem_type", "bloom_category"].each do |sub|
+      if !filters["#{sub}"].empty?
         any_of do
-          with(:instructor_id, user.id)
-          with(:access_level, 1)
-          if user.privilege != "Student"
-            with(:access_level, 2)
+          filters["#{sub}"].each do |sort_param|
+            search_hash["#{sub}"] = sort_param
+            # with("#{sub}", sort_param)
           end
         end
-
-        filters[:tags].each do |tag|
-          with(:tag_names, tag)
-        end
-
-
-        ["problem_type", "bloom_category"].each do |sub|
-          if !filters["#{sub}"].empty?
-            any_of do
-              filters["#{sub}"].each do |sort_param|
-                with("#{sub}", sort_param)
-              end
-            end
-          end
-        end
+      end
+    end
 
         # if !filters[:problem_type].empty?
         #   any_of do
@@ -222,35 +251,38 @@ class Problem < ActiveRecord::Base
         #   end
         # end
 
-        if !filters[:collections].empty?
-          any_of do
-            filters[:collections].each do |col|
-              with(:collection_ids, col)
-            end
-          end
+    if !filters[:collections].empty?
+      any_of do
+        filters[:collections].each do |col|
+          search_hash[:collection_ids] = col
+          # with(:collection_ids, col)
         end
-
-
-
-
-
-
-        if !filters[:show_obsolete]
-          without(:obsolete, true)
-        end
-
-        fulltext filters[:search]
-
-        if filters[:sort_by] == 'Relevancy'
-          order_by(:score, :desc)
-        elsif filters[:sort_by] == 'Date Created'
-          order_by(:created_date, :desc)
-        elsif filters[:sort_by] == 'Last Used'
-          order_by(:last_used, :desc)
-        end
-
-        paginate :page => filters['page'], :per_page => filters['per_page']
       end
+    end
+        
+    if !filters[:show_obsolete]
+      search_hash[:obsolete] = false
+      # without(:obsolete, true)
+    end
+        
+
+    # fulltext filters[:search]
+
+    if filters[:sort_by] == 'Relevancy'
+      search_hash[:sort] = {:score => {:order => :desc}}
+      # order_by(:score, :desc)
+    elsif filters[:sort_by] == 'Date Created'
+      search_hash[:sort] = {:created_date => {:order => :desc}}
+      # order_by(:created_date, :desc)
+    elsif filters[:sort_by] == 'Last Used'
+      search_hash[:sort] = {:last_used => {:order => :desc}}
+      # order_by(:last_used, :desc)
+    end
+
+    paginate :page => filters['page'], :per_page => filters['per_page']  
+    problems = Problem.search(search_hash)
+        
+    # end
       # debugger
     if !problems.nil?
       results = problems.results
