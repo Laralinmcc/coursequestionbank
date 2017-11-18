@@ -1,5 +1,8 @@
+require 'ruql_renderer'
 class Collection < ActiveRecord::Base
   include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
+  
   attr_accessible :last_used, :name, :description, :is_public, :color, :access_level
   validates :name, presence: true #, uniqueness: true for now this is bad
   has_and_belongs_to_many :problems
