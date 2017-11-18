@@ -1,0 +1,126 @@
+[2017-11-18 03:59:49,641][INFO ][node                     ] [Black Box] version[0.90.7], pid[22704], build[36897d0/2013-11-13T12:06:54Z]
+[2017-11-18 03:59:49,642][INFO ][node                     ] [Black Box] initializing ...
+[2017-11-18 03:59:49,648][INFO ][plugins                  ] [Black Box] loaded [], sites []
+[2017-11-18 03:59:51,889][INFO ][node                     ] [Black Box] initialized
+[2017-11-18 03:59:51,890][INFO ][node                     ] [Black Box] starting ...
+[2017-11-18 03:59:52,098][INFO ][transport                ] [Black Box] bound_address {inet[/127.0.0.1:9300]}, publish_address {inet[/192.168.0.1:9300]}
+[2017-11-18 03:59:52,139][WARN ][discovery.zen.ping.multicast] [Black Box] disabled, failed to setup multicast discovery on port [54328], [/192.168.0.1]: Cannot assign requested address
+[2017-11-18 03:59:55,150][INFO ][cluster.service          ] [Black Box] new_master [Black Box][51SXu1mRQgKg6qXN_SdP9g][inet[/192.168.0.1:9300]], reason: zen-disco-join (elected_as_master)
+[2017-11-18 04:00:22,140][WARN ][discovery                ] [Black Box] waited for 30s and no initial state was set by the discovery
+[2017-11-18 04:00:22,141][INFO ][discovery                ] [Black Box] elasticsearch/51SXu1mRQgKg6qXN_SdP9g
+[2017-11-18 04:00:22,149][INFO ][http                     ] [Black Box] bound_address {inet[/127.0.0.1:9200]}, publish_address {inet[/192.168.0.1:9200]}
+[2017-11-18 04:00:22,150][INFO ][node                     ] [Black Box] started
+[2017-11-18 04:00:25,214][WARN ][cluster.service          ] [Black Box] failed to connect to node [[Black Box][51SXu1mRQgKg6qXN_SdP9g][inet[/192.168.0.1:9300]]]
+org.elasticsearch.transport.ConnectTransportException: [Black Box][inet[/192.168.0.1:9300]] connect_timeout[30s]
+	at org.elasticsearch.transport.netty.NettyTransport.connectToChannels(NettyTransport.java:693)
+	at org.elasticsearch.transport.netty.NettyTransport.connectToNode(NettyTransport.java:622)
+	at org.elasticsearch.transport.netty.NettyTransport.connectToNode(NettyTransport.java:590)
+	at org.elasticsearch.transport.TransportService.connectToNode(TransportService.java:129)
+	at org.elasticsearch.cluster.service.InternalClusterService$UpdateTask.run(InternalClusterService.java:394)
+	at org.elasticsearch.common.util.concurrent.PrioritizedEsThreadPoolExecutor$TieBreakingPrioritizedRunnable.run(PrioritizedEsThreadPoolExecutor.java:135)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: org.elasticsearch.common.netty.channel.ConnectTimeoutException: connection timed out: /192.168.0.1:9300
+	at org.elasticsearch.common.netty.channel.socket.nio.NioClientBoss.processConnectTimeout(NioClientBoss.java:137)
+	at org.elasticsearch.common.netty.channel.socket.nio.NioClientBoss.process(NioClientBoss.java:83)
+	at org.elasticsearch.common.netty.channel.socket.nio.AbstractNioSelector.run(AbstractNioSelector.java:318)
+	at org.elasticsearch.common.netty.channel.socket.nio.NioClientBoss.run(NioClientBoss.java:42)
+	at org.elasticsearch.common.netty.util.ThreadRenamingRunnable.run(ThreadRenamingRunnable.java:108)
+	at org.elasticsearch.common.netty.util.internal.DeadLockProofWorker$1.run(DeadLockProofWorker.java:42)
+	... 3 more
+[2017-11-18 04:00:25,254][INFO ][gateway                  ] [Black Box] recovered [0] indices into cluster_state
+[2017-11-18 04:02:41,408][INFO ][cluster.metadata         ] [Black Box] [problems] creating index, cause [api], shards [5]/[1], mappings [problem]
+[2017-11-18 04:04:22,324][WARN ][cluster.service          ] [Black Box] failed to reconnect to node [Black Box][51SXu1mRQgKg6qXN_SdP9g][inet[/192.168.0.1:9300]]
+org.elasticsearch.transport.ConnectTransportException: [Black Box][inet[/192.168.0.1:9300]] connect_timeout[30s]
+	at org.elasticsearch.transport.netty.NettyTransport.connectToChannels(NettyTransport.java:693)
+	at org.elasticsearch.transport.netty.NettyTransport.connectToNode(NettyTransport.java:622)
+	at org.elasticsearch.transport.netty.NettyTransport.connectToNode(NettyTransport.java:590)
+	at org.elasticsearch.transport.TransportService.connectToNode(TransportService.java:129)
+	at org.elasticsearch.cluster.service.InternalClusterService$ReconnectToNodes.run(InternalClusterService.java:505)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: org.elasticsearch.common.netty.channel.ConnectTimeoutException: connection timed out: /192.168.0.1:9300
+	at org.elasticsearch.common.netty.channel.socket.nio.NioClientBoss.processConnectTimeout(NioClientBoss.java:137)
+	at org.elasticsearch.common.netty.channel.socket.nio.NioClientBoss.process(NioClientBoss.java:83)
+	at org.elasticsearch.common.netty.channel.socket.nio.AbstractNioSelector.run(AbstractNioSelector.java:318)
+	at org.elasticsearch.common.netty.channel.socket.nio.NioClientBoss.run(NioClientBoss.java:42)
+	at org.elasticsearch.common.netty.util.ThreadRenamingRunnable.run(ThreadRenamingRunnable.java:108)
+	at org.elasticsearch.common.netty.util.internal.DeadLockProofWorker$1.run(DeadLockProofWorker.java:42)
+	... 3 more
+[2017-11-18 04:04:36,030][INFO ][cluster.metadata         ] [Black Box] [collections] creating index, cause [api], shards [5]/[1], mappings [collection]
+[2017-11-18 04:06:27,368][INFO ][cluster.metadata         ] [Black Box] [problems] deleting index
+[2017-11-18 04:06:27,428][INFO ][cluster.metadata         ] [Black Box] [problems] creating index, cause [api], shards [5]/[1], mappings [problem]
+[2017-11-18 04:08:22,722][WARN ][cluster.service          ] [Black Box] failed to reconnect to node [Black Box][51SXu1mRQgKg6qXN_SdP9g][inet[/192.168.0.1:9300]]
+org.elasticsearch.transport.ConnectTransportException: [Black Box][inet[/192.168.0.1:9300]] connect_timeout[30s]
+	at org.elasticsearch.transport.netty.NettyTransport.connectToChannels(NettyTransport.java:693)
+	at org.elasticsearch.transport.netty.NettyTransport.connectToNode(NettyTransport.java:622)
+	at org.elasticsearch.transport.netty.NettyTransport.connectToNode(NettyTransport.java:590)
+	at org.elasticsearch.transport.TransportService.connectToNode(TransportService.java:129)
+	at org.elasticsearch.cluster.service.InternalClusterService$ReconnectToNodes.run(InternalClusterService.java:505)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: org.elasticsearch.common.netty.channel.ConnectTimeoutException: connection timed out: /192.168.0.1:9300
+	at org.elasticsearch.common.netty.channel.socket.nio.NioClientBoss.processConnectTimeout(NioClientBoss.java:137)
+	at org.elasticsearch.common.netty.channel.socket.nio.NioClientBoss.process(NioClientBoss.java:83)
+	at org.elasticsearch.common.netty.channel.socket.nio.AbstractNioSelector.run(AbstractNioSelector.java:318)
+	at org.elasticsearch.common.netty.channel.socket.nio.NioClientBoss.run(NioClientBoss.java:42)
+	at org.elasticsearch.common.netty.util.ThreadRenamingRunnable.run(ThreadRenamingRunnable.java:108)
+	at org.elasticsearch.common.netty.util.internal.DeadLockProofWorker$1.run(DeadLockProofWorker.java:42)
+	... 3 more
+[2017-11-18 04:12:23,318][WARN ][cluster.service          ] [Black Box] failed to reconnect to node [Black Box][51SXu1mRQgKg6qXN_SdP9g][inet[/192.168.0.1:9300]]
+org.elasticsearch.transport.ConnectTransportException: [Black Box][inet[/192.168.0.1:9300]] connect_timeout[30s]
+	at org.elasticsearch.transport.netty.NettyTransport.connectToChannels(NettyTransport.java:693)
+	at org.elasticsearch.transport.netty.NettyTransport.connectToNode(NettyTransport.java:622)
+	at org.elasticsearch.transport.netty.NettyTransport.connectToNode(NettyTransport.java:590)
+	at org.elasticsearch.transport.TransportService.connectToNode(TransportService.java:129)
+	at org.elasticsearch.cluster.service.InternalClusterService$ReconnectToNodes.run(InternalClusterService.java:505)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: org.elasticsearch.common.netty.channel.ConnectTimeoutException: connection timed out: /192.168.0.1:9300
+	at org.elasticsearch.common.netty.channel.socket.nio.NioClientBoss.processConnectTimeout(NioClientBoss.java:137)
+	at org.elasticsearch.common.netty.channel.socket.nio.NioClientBoss.process(NioClientBoss.java:83)
+	at org.elasticsearch.common.netty.channel.socket.nio.AbstractNioSelector.run(AbstractNioSelector.java:318)
+	at org.elasticsearch.common.netty.channel.socket.nio.NioClientBoss.run(NioClientBoss.java:42)
+	at org.elasticsearch.common.netty.util.ThreadRenamingRunnable.run(ThreadRenamingRunnable.java:108)
+	at org.elasticsearch.common.netty.util.internal.DeadLockProofWorker$1.run(DeadLockProofWorker.java:42)
+	... 3 more
+[2017-11-18 04:16:23,561][WARN ][cluster.service          ] [Black Box] failed to reconnect to node [Black Box][51SXu1mRQgKg6qXN_SdP9g][inet[/192.168.0.1:9300]]
+org.elasticsearch.transport.ConnectTransportException: [Black Box][inet[/192.168.0.1:9300]] connect_timeout[30s]
+	at org.elasticsearch.transport.netty.NettyTransport.connectToChannels(NettyTransport.java:693)
+	at org.elasticsearch.transport.netty.NettyTransport.connectToNode(NettyTransport.java:622)
+	at org.elasticsearch.transport.netty.NettyTransport.connectToNode(NettyTransport.java:590)
+	at org.elasticsearch.transport.TransportService.connectToNode(TransportService.java:129)
+	at org.elasticsearch.cluster.service.InternalClusterService$ReconnectToNodes.run(InternalClusterService.java:505)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: org.elasticsearch.common.netty.channel.ConnectTimeoutException: connection timed out: /192.168.0.1:9300
+	at org.elasticsearch.common.netty.channel.socket.nio.NioClientBoss.processConnectTimeout(NioClientBoss.java:137)
+	at org.elasticsearch.common.netty.channel.socket.nio.NioClientBoss.process(NioClientBoss.java:83)
+	at org.elasticsearch.common.netty.channel.socket.nio.AbstractNioSelector.run(AbstractNioSelector.java:318)
+	at org.elasticsearch.common.netty.channel.socket.nio.NioClientBoss.run(NioClientBoss.java:42)
+	at org.elasticsearch.common.netty.util.ThreadRenamingRunnable.run(ThreadRenamingRunnable.java:108)
+	at org.elasticsearch.common.netty.util.internal.DeadLockProofWorker$1.run(DeadLockProofWorker.java:42)
+	... 3 more
+[2017-11-18 04:20:23,850][WARN ][cluster.service          ] [Black Box] failed to reconnect to node [Black Box][51SXu1mRQgKg6qXN_SdP9g][inet[/192.168.0.1:9300]]
+org.elasticsearch.transport.ConnectTransportException: [Black Box][inet[/192.168.0.1:9300]] connect_timeout[30s]
+	at org.elasticsearch.transport.netty.NettyTransport.connectToChannels(NettyTransport.java:693)
+	at org.elasticsearch.transport.netty.NettyTransport.connectToNode(NettyTransport.java:622)
+	at org.elasticsearch.transport.netty.NettyTransport.connectToNode(NettyTransport.java:590)
+	at org.elasticsearch.transport.TransportService.connectToNode(TransportService.java:129)
+	at org.elasticsearch.cluster.service.InternalClusterService$ReconnectToNodes.run(InternalClusterService.java:505)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: org.elasticsearch.common.netty.channel.ConnectTimeoutException: connection timed out: /192.168.0.1:9300
+	at org.elasticsearch.common.netty.channel.socket.nio.NioClientBoss.processConnectTimeout(NioClientBoss.java:137)
+	at org.elasticsearch.common.netty.channel.socket.nio.NioClientBoss.process(NioClientBoss.java:83)
+	at org.elasticsearch.common.netty.channel.socket.nio.AbstractNioSelector.run(AbstractNioSelector.java:318)
+	at org.elasticsearch.common.netty.channel.socket.nio.NioClientBoss.run(NioClientBoss.java:42)
+	at org.elasticsearch.common.netty.util.ThreadRenamingRunnable.run(ThreadRenamingRunnable.java:108)
+	at org.elasticsearch.common.netty.util.internal.DeadLockProofWorker$1.run(DeadLockProofWorker.java:42)
+	... 3 more
