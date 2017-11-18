@@ -11,30 +11,43 @@ class Collection < ActiveRecord::Base
   scope :mine_or_public, ->(user) {where('instructor_id=? OR access_level<?', "#{user.id}", '3')}
   scope :public, where("access_level < 3")
 
+  #searchable do
+    #text :name
+    #text :description
+    #integer :access_level
+    #integer :instructor_id
+ # end
+ 
   searchable do
-    text :name
-    text :description
-    integer :access_level
-    integer :instructor_id
-  end
+    mappings dynamic: 'false' do
+      indexes :name
+      indexes :description
+      indexes :access_level
+      indexes :instructor_id
+    end
+  end 
 
   def self.filter(user, searchers)
+    if user.privilege != "Student"
+      collections = Collection.search(:access_level => 2, :instructor_id => user.uid).records
+    else 
+      collections = Collection.search(:access_level => 1, :instructor_id => user.uid).records
+    end 
+    
+    
+   # collections = Collection.search do
 
+     # any_of do
 
-    collections = Collection.search do
+     #   with(:access_level, 1)
+     #   with(:instructor_id, user.uid)
+     #   if user.privilege != "Student"
 
-      any_of do
+     #     with(:access_level, 2)
+     #   end
+   #   end
 
-        with(:access_level, 1)
-        with(:instructor_id, user.uid)
-        if user.privilege != "Student"
-
-          with(:access_level, 2)
-        end
-      end
-
-      fulltext searchers[:search] + "~"
-    end
+    #fulltext searchers[:search] + "~"
 
     if !collections.nil?
       results = collections.results
